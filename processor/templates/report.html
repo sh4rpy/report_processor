@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Сформировать отчет {% endblock %}
+
+{% block content %}
+  {% include 'nav.html' %}
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-offset-4 is-4">
+          <div class="content">
+            <h1>Выбрать даты для отчета</h1>
+          </div>
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="button is-link" style="margin-top: 20px; width: 150px; height: 45px;">Сформировать</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  </section>
+{% endblock %}

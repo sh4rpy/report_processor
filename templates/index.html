@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %} Главная {% endblock %}
+
+{% block content %}
+  {% include 'nav.html' %}
+
+  <table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Дата</th>
+      <th>Тег</th>
+      <th>Название</th>
+      <th>Подробное описание</th>
+      <th>Компания</th>
+      <th>Работники</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for task in tasks %}
+    <tr>
+      <td>{{ task.date }}</td>
+      <td>{{ task.tag }}</td>
+      <td><a href="{% url 'update_task' pk=task.pk %}">{{ task.name }}</a></td>
+      <td>{{ task.description }}</td>
+      <td>{{ task.company }}</td>
+      <td>{{ task.employees }}</td>
+      <td><a href="{% url 'delete_task' pk=task.pk %}" class="delete is-medium" style="background-color: red;"></a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
