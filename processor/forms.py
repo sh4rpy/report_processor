@@ -15,7 +15,7 @@ class TaskForm(forms.ModelForm):
         }
 
 
-class ReportDatesForm(forms.Form):
+class ReportForm(forms.Form):
     date_from = forms.DateField(widget=forms.DateInput(attrs={'class': 'input', }), label='От:')
     date_to = forms.DateField(widget=forms.DateInput(attrs={'class': 'input', }), label='До:')
     company = forms.ChoiceField(

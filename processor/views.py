@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 
-from .forms import TaskForm, ReportDatesForm
+from .forms import TaskForm, ReportForm
 from .models import Task
 from .utils import get_report_content, get_report
 
@@ -35,7 +35,7 @@ class TaskDeleteView(DeleteView):
 
 class ReportView(FormView):
     template_name = 'report.html'
-    form_class = ReportDatesForm
+    form_class = ReportForm
     success_url = reverse_lazy('tasks_list')
 
     def form_valid(self, form):
