@@ -23,7 +23,7 @@
       <td>{{ task.date }}</td>
       <td>{{ task.tag }}</td>
       <td><a href="{% url 'update_task' pk=task.pk %}">{{ task.name }}</a></td>
-      <td>{{ task.description }}</td>
+      <td>{{ task.description|truncatewords:15 }}</td>
       <td>{{ task.company }}</td>
       <td>{{ task.employees }}</td>
       <td><a href="{% url 'delete_task' pk=task.pk %}" class="delete is-medium" style="background-color: red;"></a></td>
