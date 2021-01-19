@@ -9,7 +9,11 @@
       <div class="columns">
         <div class="column is-offset-4 is-4">
           <div class="content">
-            <h1>Добавить задачу</h1>
+            {% if update %}
+              <h1>Изменить задачу</h1>
+            {% else %}
+              <h1>Добавить задачу</h1>
+            {% endif %}
           </div>
           <form method="post">
             {% csrf_token %}

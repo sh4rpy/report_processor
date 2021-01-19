@@ -14,15 +14,22 @@ class TaskListView(ListView):
 
 class TaskCreateView(CreateView):
     form_class = TaskForm
-    template_name = 'create_or_update_task.html'
+    template_name = 'processor/create_or_update_task.html'
     success_url = reverse_lazy('tasks_list')
 
 
 class TaskUpdateView(UpdateView):
     form_class = TaskForm
-    template_name = 'create_or_update_task.html'
+    template_name = 'processor/create_or_update_task.html'
     success_url = reverse_lazy('tasks_list')
     queryset = Task.objects.all()
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['update'] = True
+        return context
 
 
 class TaskDeleteView(DeleteView):
@@ -34,7 +41,7 @@ class TaskDeleteView(DeleteView):
 
 
 class ReportView(FormView):
-    template_name = 'report.html'
+    template_name = 'processor/report.html'
     form_class = ReportForm
     success_url = reverse_lazy('tasks_list')
 
