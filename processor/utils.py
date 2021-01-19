@@ -3,16 +3,14 @@ from docxtpl import DocxTemplate
 
 
 def get_report_content(tasks, company, date_from, date_to):
-    position = 1
     report_content = {
         'company': company,
         'date_from': date_from.strftime('%d.%m.%Y'),
         'date_to': date_to.strftime('%d.%m.%Y'),
-        'tasks': ''
+        'tasks': [],
     }
     for task in tasks:
-        report_content['tasks'] += f'{position}. {task.description}\n'
-        position += 1
+        report_content['tasks'].append(task.description)
     return report_content
 
 
