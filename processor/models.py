@@ -10,7 +10,7 @@ class Tag(models.Model):
 
 class Task(models.Model):
     class Meta:
-        ordering = ['-pk']
+        ordering = ['-date']
 
     COMPANY_CHOICES = [
         ('КП', 'КП',),
