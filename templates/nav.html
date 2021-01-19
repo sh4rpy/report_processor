@@ -1,13 +1,9 @@
 <nav class="navbar" role="navigation" aria-label="main navigation" style="margin-bottom: 30px;">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="{% url 'tasks_list' %}">Выполненные задачи</a>
-  </div>
-
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
+      <a class="navbar-item" href="{% url 'tasks_list' %}">Выполненные задачи</a>
       <a class="navbar-item" href="{% url 'create_task' %}">Добавить задачу</a>
       <a class="navbar-item" href="{% url 'report' %}">Сформировать отчет</a>
     </div>
-
   </div>
 </nav>
