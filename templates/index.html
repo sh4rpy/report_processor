@@ -21,11 +21,11 @@
   {% for task in tasks %}
     <tr>
       <td>{{ task.date }}</td>
-      <td>{{ task.tag }}</td>
+      <td>{% if task.tag %}{{ task.tag }}{% else %}-{% endif %}</td>
       <td><a href="{% url 'update_task' pk=task.pk %}">{{ task.name }}</a></td>
       <td>{{ task.description|truncatewords:15 }}</td>
       <td>{{ task.company }}</td>
-      <td>{{ task.employees }}</td>
+      <td>{% if task.employees %}{{ task.employees }}{% else %}-{% endif %}</td>
       <td><a href="{% url 'delete_task' pk=task.pk %}" class="delete is-medium" style="background-color: red;"></a></td>
     </tr>
   {% endfor %}

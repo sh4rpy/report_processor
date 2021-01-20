@@ -8,6 +8,13 @@ class Tag(models.Model):
         return self.name
 
 
+class Employee(models.Model):
+    employees = models.CharField(max_length=18, verbose_name='Работники')
+
+    def __str__(self):
+        return self.employees
+
+
 class Task(models.Model):
     class Meta:
         ordering = ['-date']
@@ -16,16 +23,14 @@ class Task(models.Model):
         ('КП', 'КП',),
         ('АО', 'АО',),
     ]
-    EMPLOYEES_CHOICES = [
-        ('Левашов/Шитик', 'Левашов/Шитик'),
-        ('Фурсов/Дмитриев', 'Фурсов/Дмитриев'),
-    ]
     date = models.DateField(verbose_name='Дата')
-    tag = models.ForeignKey(Tag, null=True, blank=True, on_delete=models.SET_NULL, related_name='tasks')
+    tag = models.ForeignKey(Tag, verbose_name='Тег', null=True, blank=True, on_delete=models.SET_NULL,
+                            related_name='tasks')
     name = models.CharField(max_length=70, verbose_name='Название')
     description = models.TextField(verbose_name='Подробное описание задачи')
     company = models.CharField(max_length=2, verbose_name='Компания', choices=COMPANY_CHOICES)
-    employees = models.CharField(max_length=15, verbose_name='Работники', choices=EMPLOYEES_CHOICES)
+    employees = models.ForeignKey(Employee, verbose_name='Работники', null=True, blank=True,
+                                  on_delete=models.SET_NULL, related_name='tasks')
 
     def __str__(self):
         return self.name
