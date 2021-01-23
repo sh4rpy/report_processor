@@ -7,18 +7,21 @@ from .utils import get_report_content, get_report
 
 
 class TaskListView(ListView):
+    """Главная страница со списком выполненных задач"""
     model = Task
     template_name = 'index.html'
     context_object_name = 'tasks'
 
 
 class TaskCreateView(CreateView):
+    """Форма создания задачи"""
     form_class = TaskForm
     template_name = 'processor/create_or_update_task.html'
     success_url = reverse_lazy('tasks_list')
 
 
 class TaskUpdateView(UpdateView):
+    """Форма редактирования задачи"""
     form_class = TaskForm
     template_name = 'processor/create_or_update_task.html'
     success_url = reverse_lazy('tasks_list')
@@ -26,11 +29,12 @@ class TaskUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['update'] = True
+        context['update'] = True  # нужно для правильного рендеринга кнопки и заголовка
         return context
 
 
 class TaskDeleteView(DeleteView):
+    """Удаление задачи"""
     model = Task
     success_url = reverse_lazy('tasks_list')
 
@@ -39,6 +43,7 @@ class TaskDeleteView(DeleteView):
 
 
 class ReportView(FormView):
+    """Страница создания отчета"""
     template_name = 'processor/report.html'
     form_class = ReportForm
     success_url = reverse_lazy('tasks_list')
@@ -52,5 +57,6 @@ class ReportView(FormView):
             date__gte=date_from).filter(
             date__lte=date_to).filter(
             company=company)
+        # создаем и отдаем отчет
         report = get_report(get_report_content(tasks, company, date_from, date_to))
         return report

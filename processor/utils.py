@@ -3,18 +3,18 @@ from docxtpl import DocxTemplate
 
 
 def get_report_content(tasks, company, date_from, date_to):
+    """Отдает контент для .docx файла"""
     report_content = {
         'company': company,
         'date_from': date_from.strftime('%d.%m.%Y'),
         'date_to': date_to.strftime('%d.%m.%Y'),
-        'tasks': [],
+        'tasks': [task.description for task in tasks],
     }
-    for task in tasks:
-        report_content['tasks'].append(task.description)
     return report_content
 
 
 def get_report(content):
+    """Отдает пользователю готовый .docx файл"""
     template = DocxTemplate('processor/docx/template.docx')
     template.render(content)
     response = HttpResponse(

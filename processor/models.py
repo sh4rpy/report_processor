@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Tag(models.Model):
+    """Модель для тегов"""
     name = models.CharField(max_length=50, verbose_name='Тег')
 
     def __str__(self):
@@ -9,6 +10,7 @@ class Tag(models.Model):
 
 
 class Employee(models.Model):
+    """Модель для работников"""
     employees = models.CharField(max_length=18, verbose_name='Работники')
 
     def __str__(self):
@@ -16,6 +18,7 @@ class Employee(models.Model):
 
 
 class Task(models.Model):
+    """Модель для задач"""
     class Meta:
         ordering = ['-date']
 

@@ -5,6 +5,7 @@ from .models import Task
 
 
 class TaskForm(forms.ModelForm):
+    """Форма добавления/редактирования задачи"""
     class Meta:
         model = Task
         fields = ('date', 'tag', 'name', 'description', 'company', 'employees')
@@ -16,6 +17,7 @@ class TaskForm(forms.ModelForm):
 
 
 class ReportForm(forms.Form):
+    """Форма создания отчета"""
     date_from = forms.DateField(widget=forms.DateInput(attrs={'class': 'input', }), label='От:')
     date_to = forms.DateField(widget=forms.DateInput(attrs={'class': 'input', }), label='До:')
     company = forms.ChoiceField(
