@@ -34,6 +34,7 @@ class TaskTestForms(TestCase):
         self.assertTrue(Task.objects.filter(name='test2').exists())
 
     def test_wrong_create_form_data(self):
+        """Невалидная форма не создает запись в БД"""
         task_count = Task.objects.count()
         wrong_form_data = {
             'date': 'oooops',
@@ -47,6 +48,7 @@ class TaskTestForms(TestCase):
         self.assertFormError(response, 'form', 'date', 'Введите правильную дату.')
 
     def test_generate_report(self):
+        """При валидной форме начинается скачивание отчета"""
         form_data = {
             'date_from': '2021-01-10',
             'date_to': '2021-01-10',
@@ -57,6 +59,7 @@ class TaskTestForms(TestCase):
         self.assertEquals(response.get('Content-Disposition'), 'attachment; filename=report.docx')
 
     def test_wrong_data_generate_report(self):
+        """При невалидной форме скачивание отчета не начинается"""
         wrong_form_data = {
             'date_from': '2021-01-20',
             'date_to': '2021-01-10',
