@@ -30,4 +30,4 @@ class ReportForm(forms.Form):
         if isinstance(date_from, type(None)) or isinstance(date_to, type(None)):
             raise ValidationError('')
         if date_from > date_to:
-            raise ValidationError('Дата "От" не может быть больше даты "До"')
+            self.add_error('date_from', 'Дата "От" не может быть больше даты "До"')
