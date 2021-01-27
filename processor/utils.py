@@ -8,7 +8,7 @@ def get_report_content(tasks, company, date_from, date_to):
         'company': company,
         'date_from': date_from.strftime('%d.%m.%Y'),
         'date_to': date_to.strftime('%d.%m.%Y'),
-        'tasks': [task.description for task in tasks],
+        'tasks': [f'- {task.date.strftime("%d.%m.%Y")}. {task.description}' for task in tasks],
     }
     return report_content
 
