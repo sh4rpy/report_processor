@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} Добавить задачу {% endblock %}
+{% block title %} {% if update %}Изменить задачу{% else %}Добавить задачу{% endif %}{% endblock %}
 
 {% block content %}
   {% include 'nav.html' %}
@@ -19,10 +19,9 @@
             {% csrf_token %}
             {{ form.as_p }}
             <button class="button is-link" style="margin-top: 20px; width: 150px; height: 45px;">Сохранить</button>
-
+          </form>
         </div>
       </div>
     </div>
-  </form>
   </section>
 {% endblock %}
