@@ -8,7 +8,7 @@ from .utils import get_report_content, get_report
 
 class TaskListView(ListView):
     """Главная страница со списком выполненных задач"""
-    model = Task
+    queryset = Task.objects.select_related('tag', 'employees')
     template_name = 'index.html'
     context_object_name = 'tasks'
 
@@ -25,7 +25,7 @@ class TaskUpdateView(UpdateView):
     form_class = TaskForm
     template_name = 'processor/create_or_update_task.html'
     success_url = reverse_lazy('tasks_list')
-    queryset = Task.objects.all()
+    queryset = Task.objects.select_related('tag', 'employees')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -53,7 +53,8 @@ class ReportView(FormView):
         date_from = form.cleaned_data['date_from']
         date_to = form.cleaned_data['date_to']
         company = form.cleaned_data['company']
-        tasks = Task.objects.filter(
+        tasks = Task.objects.select_related(
+            'tag', 'employees').filter(
             date__gte=date_from).filter(
             date__lte=date_to).filter(
             company=company)
