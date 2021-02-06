@@ -10,7 +10,7 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ('date', 'tag', 'name', 'description', 'company', 'employees')
         widgets = {
-            'date': forms.DateInput(attrs={'class': 'input', }),
+            'date': forms.DateInput(attrs={'class': 'input datetime-input', }),
             'name': forms.TextInput(attrs={'class': 'input', }),
             'description': forms.Textarea(attrs={'class': 'textarea', }),
         }
@@ -18,8 +18,8 @@ class TaskForm(forms.ModelForm):
 
 class ReportForm(forms.Form):
     """Форма создания отчета"""
-    date_from = forms.DateField(widget=forms.DateInput(attrs={'class': 'input', }), label='От:')
-    date_to = forms.DateField(widget=forms.DateInput(attrs={'class': 'input', }), label='До:')
+    date_from = forms.DateField(widget=forms.DateInput(attrs={'class': 'input datetime-input', }), label='От:')
+    date_to = forms.DateField(widget=forms.DateInput(attrs={'class': 'input datetime-input', }), label='До:')
     company = forms.ChoiceField(
         widget=forms.Select(), label='Компания', choices=Task.COMPANY_CHOICES
     )

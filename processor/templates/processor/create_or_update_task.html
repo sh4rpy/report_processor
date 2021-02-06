@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %} {% if update %}Изменить задачу{% else %}Добавить задачу{% endif %}{% endblock %}
 
 {% block content %}
@@ -24,4 +26,5 @@
       </div>
     </div>
   </section>
+  <script type="text/javascript" src={% static 'js/datePicker.js' %}></script>
 {% endblock %}
