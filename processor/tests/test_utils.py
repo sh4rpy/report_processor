@@ -15,7 +15,7 @@ class TestUtils(TestCase):
         self.tasks = get_tasks(Task, 'КП', datetime.now(), datetime.now())
 
     def test_get_tasks(self):
-        """Проверяем, что отдаем кверисет с уникальной датой и уникальным описанием"""
+        """Проверяем, что отдаем кверисет с уникальными датой и описанием"""
         self.assertEqual(len(self.tasks), 1)
 
     def test_get_report_content(self):
