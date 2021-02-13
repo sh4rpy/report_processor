@@ -19,9 +19,6 @@ class Employee(models.Model):
 
 class Task(models.Model):
     """Модель для задач"""
-    class Meta:
-        ordering = ['-date']
-
     COMPANY_CHOICES = [
         ('КП', 'КП',),
         ('АО', 'АО',),

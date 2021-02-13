@@ -3,12 +3,12 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, F
 
 from .forms import TaskForm, ReportForm
 from .models import Task
-from .utils import get_report_content, get_report
+from .utils import get_tasks, get_report_content, get_report
 
 
 class TaskListView(ListView):
     """Главная страница со списком выполненных задач"""
-    queryset = Task.objects.select_related('tag', 'employees')
+    queryset = Task.objects.select_related('tag', 'employees').order_by('-date', '-pk')
     template_name = 'index.html'
     context_object_name = 'tasks'
 
@@ -53,11 +53,7 @@ class ReportView(FormView):
         date_from = form.cleaned_data['date_from']
         date_to = form.cleaned_data['date_to']
         company = form.cleaned_data['company']
-        tasks = Task.objects.select_related(
-            'tag', 'employees').filter(
-            date__gte=date_from).filter(
-            date__lte=date_to).filter(
-            company=company)
+        tasks = get_tasks(Task, company, date_from, date_to)
         # создаем и отдаем отчет
         report = get_report(get_report_content(tasks, company, date_from, date_to))
         return report
