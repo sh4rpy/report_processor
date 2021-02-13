@@ -3,6 +3,7 @@ from docxtpl import DocxTemplate
 
 
 def get_tasks(model_obj, company, date_from, date_to):
+    """Отдает отфильтрованный кверисет с уникальной датой и уникальным описанием"""
     return model_obj.objects.select_related(
             'tag', 'employees').filter(
             date__gte=date_from).filter(
