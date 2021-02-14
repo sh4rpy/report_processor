@@ -8,10 +8,10 @@ from ..utils import get_tasks, get_report_content
 
 class TestUtils(TestCase):
     def setUp(self):
-        Task.objects.bulk_create(
-            [Task(date=datetime.now(), name='test1', description='test_desc', company='КП'),
-             Task(date=datetime.now(), name='test2', description='test_desc', company='КП')],
-        )
+        Task.objects.bulk_create([
+            Task(date=datetime.now(), name='test1', description='test_desc', company='КП'),
+            Task(date=datetime.now(), name='test2', description='test_desc', company='КП')
+        ])
         self.tasks = get_tasks(Task, 'КП', datetime.now(), datetime.now())
 
     def test_get_tasks(self):
