@@ -20,5 +20,5 @@ class EmployeeAdmin(admin.ModelAdmin):
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = ('pk', 'date', 'tag', 'name', 'description', 'company', 'employees',)
-    list_filter = ('date', 'company', 'employees',)
+    list_filter = ('date', 'company', 'employees', 'tag',)
     search_fields = ('company', 'employees')
