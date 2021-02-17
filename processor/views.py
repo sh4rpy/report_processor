@@ -9,7 +9,6 @@ from .utils import get_tasks, get_report_content, get_report
 
 class TaskListView(ListView):
     """Главная страница со списком выполненных задач"""
-    # queryset = Task.objects.select_related('tag', 'employees').order_by('-date', '-pk')
     template_name = 'index.html'
     context_object_name = 'tasks'
 
