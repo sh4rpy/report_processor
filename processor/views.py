@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
 
@@ -8,9 +9,19 @@ from .utils import get_tasks, get_report_content, get_report
 
 class TaskListView(ListView):
     """Главная страница со списком выполненных задач"""
-    queryset = Task.objects.select_related('tag', 'employees').order_by('-date', '-pk')
+    # queryset = Task.objects.select_related('tag', 'employees').order_by('-date', '-pk')
     template_name = 'index.html'
     context_object_name = 'tasks'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        if query:
+            return Task.objects.select_related(
+                'tag', 'employees').filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            ).order_by(
+                '-date', '-pk')
+        return Task.objects.select_related('tag', 'employees').order_by('-date', '-pk')
 
 
 class TaskCreateView(CreateView):

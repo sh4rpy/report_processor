@@ -58,3 +58,14 @@ class TaskTestViews(TestCase):
             with self.subTest(value=value):
                 form_field = response.context.get('form').fields.get(value)
                 self.assertIsInstance(form_field, expected)
+
+    def test_search(self):
+        Task.objects.bulk_create([
+            Task(date='2021-01-01', name='test2', description='desc', company='КП'),
+            Task(date='2021-01-01', name='another', description='another_desc', company='КП')
+        ])
+        response = self.client.get('/?query=test')
+        self.assertContains(response, 'desc')
+        self.assertContains(response, 'test')
+        self.assertNotContains(response, 'another')
+        self.assertNotContains(response, 'another_desc')
