@@ -60,6 +60,7 @@ class TaskTestViews(TestCase):
                 self.assertIsInstance(form_field, expected)
 
     def test_filtering(self):
+        """Тестирует фильтрацию по тегам на главной странице"""
         Tag.objects.bulk_create([
             Tag(name='tag'),
             Tag(name='tag2')
