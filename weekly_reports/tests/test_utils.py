@@ -2,8 +2,8 @@ from datetime import datetime
 
 from django.test import TestCase
 
-from ..models import Task
-from ..utils import get_tasks, get_report_content
+from tasks.models import Task
+from weekly_reports.utils import get_tasks, get_report_content
 
 
 class TestUtils(TestCase):

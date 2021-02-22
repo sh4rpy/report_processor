@@ -1,19 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import Task
-
-
-class TaskForm(forms.ModelForm):
-    """Форма добавления/редактирования задачи"""
-    class Meta:
-        model = Task
-        fields = ('date', 'tag', 'name', 'description', 'company', 'employees')
-        widgets = {
-            'date': forms.DateInput(attrs={'class': 'input datetime-input', }),
-            'name': forms.TextInput(attrs={'class': 'input', }),
-            'description': forms.Textarea(attrs={'class': 'textarea', }),
-        }
+from tasks.models import Task
 
 
 class ReportForm(forms.Form):

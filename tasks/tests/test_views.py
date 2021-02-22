@@ -46,19 +46,6 @@ class TaskTestViews(TestCase):
                 form_field = response.context.get('form').fields.get(value)
                 self.assertIsInstance(form_field, expected)
 
-    def test_report_page_correct_context(self):
-        """Шаблон скачивания отчета сформирован с правильным контекстом"""
-        response = self.client.get(reverse('report'))
-        form_fields = {
-            'date_from': fields.DateField,
-            'date_to': fields.DateField,
-            'company': fields.ChoiceField,
-        }
-        for value, expected in form_fields.items():
-            with self.subTest(value=value):
-                form_field = response.context.get('form').fields.get(value)
-                self.assertIsInstance(form_field, expected)
-
     def test_filtering(self):
         """Тестирует фильтрацию по тегам на главной странице"""
         Tag.objects.bulk_create([
