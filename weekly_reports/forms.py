@@ -1,5 +1,4 @@
 from django import forms
-from django.core.exceptions import ValidationError
 
 from tasks.models import Task
 
@@ -15,7 +14,5 @@ class ReportForm(forms.Form):
     def clean(self):
         date_from = self.cleaned_data.get('date_from')
         date_to = self.cleaned_data.get('date_to')
-        if isinstance(date_from, type(None)) or isinstance(date_to, type(None)):
-            raise ValidationError('')
         if date_from > date_to:
             self.add_error('date_from', 'Дата "От" не может быть больше даты "До"')
