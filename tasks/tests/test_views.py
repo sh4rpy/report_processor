@@ -46,6 +46,11 @@ class TaskTestViews(TestCase):
                 form_field = response.context.get('form').fields.get(value)
                 self.assertIsInstance(form_field, expected)
 
+    def test_delete_task(self):
+        """Проверяем, что задачи корректно удаляются"""
+        self.client.delete(reverse('delete_task', kwargs={'pk': self.task.pk}))
+        self.assertEqual(Task.objects.count(), 0)
+
     def test_filtering(self):
         """Тестирует фильтрацию по тегам на главной странице"""
         Tag.objects.bulk_create([
