@@ -20,7 +20,11 @@
           <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="button is-link" style="margin-top: 20px; width: 150px; height: 45px;">Сохранить</button>
+            {% if update %}
+              <button class="button is-link" style="margin-top: 20px; width: 150px; height: 45px;">Сохранить</button>
+            {% else %}
+              <button class="button is-link" style="margin-top: 20px; width: 150px; height: 45px;">Добавить</button>
+            {% endif %}
           </form>
         </div>
       </div>
