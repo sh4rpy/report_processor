@@ -25,7 +25,7 @@ def get_report_content(tasks, company, date_from, date_to):
 
 def get_report(content):
     """Отдает пользователю готовый .docx файл"""
-    template = DocxTemplate('tasks/docx/template.docx')
+    template = DocxTemplate('weekly_reports/docx/template.docx')
     template.render(content)
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document'
