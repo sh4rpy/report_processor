@@ -1,23 +1,10 @@
 from django.shortcuts import reverse
 from django.test import TestCase, Client
 
-from tasks.models import Task
-
 
 class WeeklyReportsTestUrls(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        Task.objects.create(
-            date='2021-01-01',
-            name='test',
-            description='test_desc',
-            company='КП',
-        )
-
     def setUp(self):
         self.client = Client()
-        self.task = Task.objects.get(name='test')
 
     def test_availability_report_page(self):
         """Проверяет доступность страницы формирования отчета"""

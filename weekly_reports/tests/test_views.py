@@ -2,23 +2,10 @@ from django.forms import fields
 from django.test import TestCase, Client
 from django.urls import reverse
 
-from tasks.models import Task
-
 
 class WeeklyReportsTestViews(TestCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        Task.objects.create(
-            date='2021-01-01',
-            name='test',
-            description='test_desc',
-            company='КП',
-        )
-
     def setUp(self):
         self.client = Client()
-        self.task = Task.objects.get(name='test')
 
     def test_report_page_correct_context(self):
         """Шаблон скачивания отчета сформирован с правильным контекстом"""
