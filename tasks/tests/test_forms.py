@@ -4,7 +4,7 @@ from django.urls import reverse
 from ..models import Task
 
 
-class TaskTestForms(TestCase):
+class TasksTestForms(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -33,7 +33,7 @@ class TaskTestForms(TestCase):
         self.assertEqual(Task.objects.count(), task_count + 1)
         self.assertTrue(Task.objects.filter(name='test2').exists())
 
-    def test_wrong_create_form_data(self):
+    def test_create_wrong_form_data(self):
         """Невалидная форма не создает запись в БД"""
         task_count = Task.objects.count()
         wrong_form_data = {

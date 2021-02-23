@@ -5,7 +5,7 @@ from django.urls import reverse
 from ..models import Task, Tag
 
 
-class TaskTestViews(TestCase):
+class TasksTestViews(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

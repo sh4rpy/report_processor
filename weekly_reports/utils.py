@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from docxtpl import DocxTemplate
 
 
-def get_tasks(model_obj, company, date_from, date_to):
+def get_tasks_for_weekly_report(model_obj, company, date_from, date_to):
     """Отдает отфильтрованный кверисет с уникальными датой и описанием"""
     return model_obj.objects.select_related(
             'tag', 'employees').filter(
@@ -12,7 +12,7 @@ def get_tasks(model_obj, company, date_from, date_to):
             'date', 'description').distinct()
 
 
-def get_report_content(tasks, company, date_from, date_to):
+def get_weekly_report_content(tasks, company, date_from, date_to):
     """Отдает контент для .docx файла"""
     report_content = {
         'company': company,
@@ -23,13 +23,13 @@ def get_report_content(tasks, company, date_from, date_to):
     return report_content
 
 
-def get_report(content):
+def get_weekly_report(content):
     """Отдает пользователю готовый .docx файл"""
     template = DocxTemplate('weekly_reports/docx/template.docx')
     template.render(content)
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document'
     )
-    response['Content-Disposition'] = 'attachment; filename=report.docx'
+    response['Content-Disposition'] = 'attachment; filename=weekly_report.docx'
     template.save(response)
     return response

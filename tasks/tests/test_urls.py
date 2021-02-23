@@ -4,7 +4,7 @@ from django.test import TestCase, Client
 from ..models import Task
 
 
-class TaskTestUrls(TestCase):
+class TasksTestUrls(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

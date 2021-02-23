@@ -6,8 +6,8 @@ class WeeklyReportsTestForms(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def test_generate_report(self):
-        """При валидной форме начинается скачивание отчета"""
+    def test_generate_weekly_report(self):
+        """При валидной форме начинается скачивание еженедельного отчета"""
         form_data = {
             'date_from': '2021-01-10',
             'date_to': '2021-01-10',
@@ -15,10 +15,10 @@ class WeeklyReportsTestForms(TestCase):
         }
         response = self.client.post(reverse('weekly_report'), data=form_data)
         self.assertEqual(response.status_code, 200)
-        self.assertEquals(response.get('Content-Disposition'), 'attachment; filename=report.docx')
+        self.assertEquals(response.get('Content-Disposition'), 'attachment; filename=weekly_report.docx')
 
-    def test_wrong_data_generate_report(self):
-        """При невалидной форме скачивание отчета не начинается"""
+    def test_wrong_data_generate_weekly_report(self):
+        """При невалидной форме скачивание еженедельного отчета не начинается"""
         wrong_form_data = {
             'date_from': '2021-01-20',
             'date_to': '2021-01-10',

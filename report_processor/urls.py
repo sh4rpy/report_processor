@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('tasks.urls')),
     path('weekly-report/', include('weekly_reports.urls')),
+    path('individual_report/', include('individual_reports.urls')),
 ]
 if settings.DEBUG:
     import debug_toolbar

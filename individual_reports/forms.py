@@ -1,14 +1,15 @@
 from django import forms
 
-from tasks.models import Task
+from tasks.models import Tag
 
 
-class WeeklyReportForm(forms.Form):
-    """Форма создания еженедельного отчета"""
+class IndividualReportForm(forms.Form):
+    """Форма создания индивидуального отчета"""
     date_from = forms.DateField(widget=forms.DateInput(attrs={'class': 'input datetime-input', }), label='От:')
     date_to = forms.DateField(widget=forms.DateInput(attrs={'class': 'input datetime-input', }), label='До:')
-    company = forms.ChoiceField(
-        widget=forms.Select(), label='Компания', choices=Task.COMPANY_CHOICES
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(), label='Теги',
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'checkbox'})
     )
 
     def clean(self):
