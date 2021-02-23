@@ -3,7 +3,7 @@ from django import forms
 from tasks.models import Task
 
 
-class ReportForm(forms.Form):
+class WeeklyReportForm(forms.Form):
     """Форма создания отчета"""
     date_from = forms.DateField(widget=forms.DateInput(attrs={'class': 'input datetime-input', }), label='От:')
     date_to = forms.DateField(widget=forms.DateInput(attrs={'class': 'input datetime-input', }), label='До:')

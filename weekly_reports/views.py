@@ -2,14 +2,14 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView
 
 from tasks.models import Task
-from weekly_reports.forms import ReportForm
+from weekly_reports.forms import WeeklyReportForm
 from weekly_reports.utils import get_tasks, get_report_content, get_report
 
 
-class ReportView(FormView):
+class WeeklyReportView(FormView):
     """Страница создания отчета"""
     template_name = 'weekly_reports/report.html'
-    form_class = ReportForm
+    form_class = WeeklyReportForm
     success_url = reverse_lazy('tasks_list')
 
     def form_valid(self, form):
