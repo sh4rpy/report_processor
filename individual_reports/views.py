@@ -18,5 +18,5 @@ class IndividualReportView(FormView):
         date_to = form.cleaned_data['date_to']
         tags = form.cleaned_data['tags']
         tasks = get_tasks_for_individual_report(Task, date_from, date_to, tags)
-        # создем и отдаем индивидуальный отчет
+        # создаем и отдаем индивидуальный отчет
         return get_individual_report(tasks)
