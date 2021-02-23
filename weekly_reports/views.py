@@ -18,6 +18,6 @@ class WeeklyReportView(FormView):
         date_to = form.cleaned_data['date_to']
         company = form.cleaned_data['company']
         tasks = get_tasks_for_weekly_report(Task, company, date_from, date_to)
-        # создаем и отдаем отчет
+        # создаем и отдаем еженедельный отчет
         weekly_report = get_weekly_report(get_weekly_report_content(tasks, company, date_from, date_to))
         return weekly_report
