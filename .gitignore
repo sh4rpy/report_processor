@@ -6,6 +6,7 @@ venv
 __pycache__/
 tasks/migrations
 weekly_reports/migrations
+individual_reports/migrations
 /static
 db.sqlite3
 data.json
