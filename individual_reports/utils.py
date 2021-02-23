@@ -16,6 +16,7 @@ def get_individual_report(tasks):
     """Отдает готовый отчет в формате csv"""
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=individual_report.csv'
+    response.write(u'\ufeff'.encode('utf8'))
     writer = csv.writer(response)
     writer.writerow(['Дата', 'Название задачи', 'Описание задачи'])
     writer.writerows(tasks)
