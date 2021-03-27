@@ -3,6 +3,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from .forms import TaskForm
 from .models import Task, Tag
+from .utils import filter_or_get_all_tasks
 
 
 class TaskListView(ListView):
@@ -12,11 +13,8 @@ class TaskListView(ListView):
 
     def get_queryset(self):
         tag = self.request.GET.get('tag')
-        if tag:
-            return Task.objects.select_related(
-                'tag', 'employees').filter(tag=tag).order_by('-date', '-pk')
         return Task.objects.select_related(
-            'tag', 'employees').order_by('-date', '-pk')
+            'tag', 'employees').filter(filter_or_get_all_tasks(tag)).order_by('-date', '-pk')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
