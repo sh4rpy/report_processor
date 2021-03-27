@@ -22,6 +22,7 @@ class TaskListView(ListView):
         context = super().get_context_data(**kwargs)
         context['tags'] = Tag.objects.all()
         context['index'] = True  # показываем фильтр по тегам только на главной
+        context['current_tag_pk'] = self.request.GET.get('tag')
         return context
 
 

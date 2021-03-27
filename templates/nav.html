@@ -11,10 +11,13 @@
 {% if index %}
   <div class="select is-info" style="margin-bottom: 15px; margin-left: 18px;">
     <select onChange="window.location.href=this.value">
-      <option>Фильтр по тегам</option>
+      <option selected disabled>Фильтр по тегам</option>
       {% for tag in tags %}
-        <option value="{% url 'tasks_list' %}?tag={{ tag.pk }}">{{ tag.name }}</option>
+        <option value="{% url 'tasks_list' %}?tag={{ tag.pk }}" {% if current_tag_pk == tag.pk|stringformat:"i" %} selected {% endif %}>{{ tag.name }}</option>
       {% endfor %}
     </select>
   </div>
+  {% if current_tag_pk%}
+    <a href="{% url 'tasks_list' %}" style="text-decoration: none;"><button class="button is-link" style="margin-left: 10px;">Сбросить фильтр</button></a>
+  {% endif %}
 {% endif %}
