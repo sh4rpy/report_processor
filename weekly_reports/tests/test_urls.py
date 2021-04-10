@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 from django.test import TestCase, Client
 
@@ -5,6 +6,9 @@ from django.test import TestCase, Client
 class WeeklyReportsTestUrls(TestCase):
     def setUp(self):
         self.client = Client()
+        User = get_user_model()
+        self.user = User.objects.create_user('test', 'test@test.com', 'testpassword')
+        self.client.force_login(self.user)
 
     def test_availability_weekly_report_page(self):
         """Проверяет доступность страницы формирования еженедельного отчета"""

@@ -1,12 +1,13 @@
 from django.urls import reverse_lazy
 from django.views.generic import FormView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from tasks.models import Task
 from weekly_reports.forms import WeeklyReportForm
 from weekly_reports.utils import get_tasks_for_weekly_report, get_weekly_report_content, get_weekly_report
 
 
-class WeeklyReportView(FormView):
+class WeeklyReportView(LoginRequiredMixin, FormView):
     """Страница скачивания еженедельного отчета"""
     template_name = 'weekly_reports/weekly_report.html'
     form_class = WeeklyReportForm

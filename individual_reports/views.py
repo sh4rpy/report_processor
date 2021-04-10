@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
@@ -6,7 +7,7 @@ from .forms import IndividualReportForm
 from .utils import get_tasks_for_individual_report, get_individual_report
 
 
-class IndividualReportView(FormView):
+class IndividualReportView(LoginRequiredMixin, FormView):
     """Страница скачивания индивидуального отчета"""
     template_name = 'individual_reports/individual_report.html'
     form_class = IndividualReportForm

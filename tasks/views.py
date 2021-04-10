@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
@@ -6,7 +7,7 @@ from .models import Task, Tag
 from .utils import filter_or_get_all_tasks
 
 
-class TaskListView(ListView):
+class TaskListView(LoginRequiredMixin, ListView):
     """Главная страница со списком выполненных задач"""
     template_name = 'index.html'
     context_object_name = 'tasks'
@@ -24,14 +25,14 @@ class TaskListView(ListView):
         return context
 
 
-class TaskCreateView(CreateView):
+class TaskCreateView(LoginRequiredMixin, CreateView):
     """Форма создания задачи"""
     form_class = TaskForm
     template_name = 'tasks/create_or_update_task.html'
     success_url = reverse_lazy('tasks_list')
 
 
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
     """Форма редактирования задачи"""
     form_class = TaskForm
     template_name = 'tasks/create_or_update_task.html'
@@ -44,7 +45,7 @@ class TaskUpdateView(UpdateView):
         return context
 
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     """Удаление задачи"""
     model = Task
     success_url = reverse_lazy('tasks_list')

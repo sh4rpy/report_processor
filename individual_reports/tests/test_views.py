@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.forms import fields
 from django.test import TestCase, Client
 from django.urls import reverse
@@ -6,6 +7,9 @@ from django.urls import reverse
 class IndividualReportsTestViews(TestCase):
     def setUp(self):
         self.client = Client()
+        User = get_user_model()
+        self.user = User.objects.create_user('test', 'test@test.com', 'testpassword')
+        self.client.force_login(self.user)
 
     def test_individual_report_page_correct_context(self):
         """Шаблон скачивания индивидуального отчета сформирован с правильным контекстом"""

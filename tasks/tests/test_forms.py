@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
 from django.urls import reverse
 
@@ -17,6 +18,9 @@ class TasksTestForms(TestCase):
 
     def setUp(self):
         self.client = Client()
+        User = get_user_model()
+        self.user = User.objects.create_user('test', 'test@test.com', 'testpassword')
+        self.client.force_login(self.user)
         self.task = Task.objects.get(name='test')
 
     def test_create_task(self):
